@@ -1,0 +1,11 @@
+name: Hello World Workflow
+
+# Triggers the workflow manually via the GitHub UI
+on: [workflow_dispatch]
+
+jobs:
+  print-hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Message
+        run: echo "Hello World"
