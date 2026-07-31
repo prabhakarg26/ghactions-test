@@ -1,0 +1,35 @@
+name: "Terraform Init"
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+
+jobs:
+  terraform-init:
+    name: "Run Terraform Init"
+    runs-on: ubuntu-latest
+
+    # Optional: Set defaults if your Terraform code lives in a subdirectory
+    # defaults:
+    #   run:
+    #     working-directory: ./terraform
+
+    steps:
+      # Step 1: Check out the repository code onto the runner
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Install and configure the Terraform CLI
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: "1.14.6" # Specify your desired Terraform version
+
+      # Step 3: Initialize the Terraform directory
+      - name: Terraform Init
+        run: terraform init
